@@ -1,6 +1,6 @@
 {
   "name": "@jswork/package-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cli for package.json.",
   "homepage": "https://github.com/afeiship/package-cli",
   "author": {
