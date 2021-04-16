@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 const { Command } = require('commander');
 const chalk = require('chalk');
+const path = require('path')
 const clipboardy = require('clipboardy');
+const pkg = require(path.join(process.cwd(), 'package.json'));
 
 // next packages:
 require('@jswork/next');
@@ -28,12 +30,12 @@ nx.declare({
     init() {},
     start() {
       if (program.shortname) {
-        const [_, shortname] = nx.absolutePackage('name').split('/');
+        const [_, shortname] = nx.get(pkg, 'name').split('/');
         clipboardy.writeSync(shortname);
       }
 
       if (program.npmInstall) {
-        const name = nx.absolutePackage('name');
+        const name = nx.get(pkg, 'name');
         clipboardy.writeSync(`npm i ${name}`);
       }
     }
