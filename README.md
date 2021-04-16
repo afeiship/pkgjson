@@ -15,12 +15,13 @@ npm install @jswork/package-cli
 
 ## usage
 ~~~
-Usage: package-cli [options]
+Usage: pkg [options]
 
 Options:
-  -V, --version  output the version number
-  -d, --debug    only show cmds, but not clean.
-  -h, --help     display help for command
+  -V, --version      output the version number
+  -n, --npm-install  Get npm install script.
+  -s, --shortname    Get short name.
+  -h, --help         display help for command
 ~~~
 
 ## license
