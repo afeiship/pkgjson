@@ -8,7 +8,9 @@
 
 ## installation
 ```shell
-npm install @jswork/package-cli
+git clone https://github.com/afeiship/package-cli.git
+cd package-cli
+npm i && npm link
 ```
 
 ## usage
