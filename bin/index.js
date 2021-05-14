@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { Command } = require('commander');
 const chalk = require('chalk');
-const path = require('path')
+const path = require('path');
 const clipboardy = require('clipboardy');
 const pkg = require(path.join(process.cwd(), 'package.json'));
 
@@ -30,8 +30,8 @@ nx.declare({
     init() {},
     start() {
       if (program.shortname) {
-        const [_, shortname] = nx.get(pkg, 'name').split('/');
-        clipboardy.writeSync(shortname);
+        const res = nx.get(pkg, 'name').split('/');
+        clipboardy.writeSync(res[1] || res[0]);
       }
 
       if (program.npmInstall) {
