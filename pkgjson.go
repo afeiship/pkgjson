@@ -60,7 +60,9 @@ func (pj *PackageJSON) Modify(key string, value interface{}) error {
 	defer pj.mu.Unlock()
 
 	if _, exists := pj.Data.Get(key); !exists {
-		return fmt.Errorf("键 '%s' 不存在", key)
+		// use Add
+		return pj.Add(key, value)
+		// return fmt.Errorf("键 '%s' 不存在", key)
 	}
 
 	// pj.Data[key] = value
@@ -74,7 +76,8 @@ func (pj *PackageJSON) Add(key string, value interface{}) error {
 	defer pj.mu.Unlock()
 
 	if _, exists := pj.Data.Get(key); exists {
-		return fmt.Errorf("键 '%s' 已存在", key)
+		return nil
+		// return fmt.Errorf("键 '%s' 已存在", key)
 	}
 
 	pj.Data.Set(key, value)
@@ -87,7 +90,8 @@ func (pj *PackageJSON) Delete(key string) error {
 	defer pj.mu.Unlock()
 
 	if _, exists := pj.Data.Get(key); !exists {
-		return fmt.Errorf("键 '%s' 不存在", key)
+		// return fmt.Errorf("键 '%s' 不存在", key)
+		return nil
 	}
 
 	// delete(pj.Data, key)
