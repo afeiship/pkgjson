@@ -54,8 +54,8 @@ func (pj *PackageJSON) Read() error {
 	return nil
 }
 
-// Modify 修改指定键的值
-func (pj *PackageJSON) Modify(key string, value interface{}) error {
+// Update 修改指定键的值
+func (pj *PackageJSON) Update(key string, value interface{}) error {
 	pj.mu.Lock()
 	defer pj.mu.Unlock()
 
