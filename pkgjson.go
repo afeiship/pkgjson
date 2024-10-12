@@ -62,20 +62,6 @@ func (pj *PackageJSON) Update(key string, value interface{}) error {
 	return nil
 }
 
-// Add 添加一个新的键值对
-func (pj *PackageJSON) Add(key string, value interface{}) error {
-	pj.mu.Lock()
-	defer pj.mu.Unlock()
-
-	if _, exists := pj.Data.Get(key); exists {
-		return nil
-		// return fmt.Errorf("键 '%s' 已存在", key)
-	}
-
-	pj.Data.Set(key, value)
-	return nil
-}
-
 // Delete 删除指定键
 func (pj *PackageJSON) Delete(key string) error {
 	pj.mu.Lock()
