@@ -1,0 +1,8 @@
+{
+  "name": "pkgjson",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Go library to read, modify, and manage package.json file.",
+  "author": "afeiship",
+  "license": "MIT"
+}
