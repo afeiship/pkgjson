@@ -58,14 +58,6 @@ func (pj *PackageJSON) Read() error {
 func (pj *PackageJSON) Update(key string, value interface{}) error {
 	pj.mu.Lock()
 	defer pj.mu.Unlock()
-
-	if _, exists := pj.Data.Get(key); !exists {
-		// use Add
-		return pj.Add(key, value)
-		// return fmt.Errorf("键 '%s' 不存在", key)
-	}
-
-	// pj.Data[key] = value
 	pj.Data.Set(key, value)
 	return nil
 }
