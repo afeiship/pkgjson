@@ -92,7 +92,7 @@ func (pj *PackageJSON) Save() error {
 	// 处理 unicode 转义字符
 	bytes = []byte(convertUnicodeEscape(string(bytes)))
 
-	if err := ioutil.WriteFile(pj.FilePath, bytes, 0644); err != nil {
+	if err := os.WriteFile(pj.FilePath, bytes, 0644); err != nil {
 		return fmt.Errorf("无法写入文件: %v", err)
 	}
 
