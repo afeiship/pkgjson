@@ -2,7 +2,7 @@ package pkgjson_test
 
 import (
 	"encoding/json"
-	pkgjson "github.com/afeiship/pkgname"
+	pkgjson "github.com/afeiship/pkgjson"
 	"os"
 	"path/filepath"
 	"testing"
