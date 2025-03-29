@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"regexp"
+	"strconv"
 	"sync"
 
 	"github.com/iancoleman/orderedmap"
@@ -87,6 +89,9 @@ func (pj *PackageJSON) Save() error {
 		return fmt.Errorf("无法序列化 JSON: %v", err)
 	}
 
+	// 处理 unicode 转义字符
+	bytes = []byte(convertUnicodeEscape(string(bytes)))
+
 	if err := ioutil.WriteFile(pj.FilePath, bytes, 0644); err != nil {
 		return fmt.Errorf("无法写入文件: %v", err)
 	}
@@ -106,4 +111,12 @@ func (pj *PackageJSON) Print() error {
 
 	fmt.Println(string(bytes))
 	return nil
+}
+
+func convertUnicodeEscape(s string) string {
+	re := regexp.MustCompile(`\\U([0-9A-Fa-f]{8})`)
+	return re.ReplaceAllStringFunc(s, func(match string) string {
+		code, _ := strconv.ParseInt(match[2:], 16, 32)
+		return string(rune(code))
+	})
 }
