@@ -19,6 +19,7 @@ func TestPackageJSON(t *testing.T) {
 	initialData := orderedmap.New()
 	initialData.Set("name", "test-package")
 	initialData.Set("version", "1.0.0")
+	initialData.Set("scripts.task1", "echo 'task1 🌈' && echo 'task1 done'")
 
 	bytes, err := json.MarshalIndent(initialData, "", "  ")
 	if err != nil {
@@ -80,5 +81,11 @@ func TestPackageJSON(t *testing.T) {
 	name, _ = newPJ.Get("name")
 	if name != "test-package" {
 		t.Errorf("Saved content does not match expected: got %v", name)
+	}
+
+	// get task1 script
+	task1, exists := pj.Data.Get("scripts.task1")
+	if !exists || task1 != "echo 'task1 🌈' && echo 'task1 done'" {
+		t.Error("Failed to get task1 script")
 	}
 }

@@ -3,7 +3,7 @@ package pkgjson
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"regexp"
 	"strconv"
@@ -44,7 +44,7 @@ func (pj *PackageJSON) Read() error {
 	}
 	defer file.Close()
 
-	bytes, err := ioutil.ReadAll(file)
+	bytes, err := io.ReadAll(file)
 	if err != nil {
 		return fmt.Errorf("无法读取文件: %v", err)
 	}
@@ -114,9 +114,18 @@ func (pj *PackageJSON) Print() error {
 }
 
 func convertUnicodeEscape(s string) string {
-	re := regexp.MustCompile(`\\U([0-9A-Fa-f]{8})`)
-	return re.ReplaceAllStringFunc(s, func(match string) string {
+	// Handle both \u0026 (4-digit) and \U0001F600 (8-digit) style escapes
+	// First handle 4-digit escapes (\uXXXX)
+	s = regexp.MustCompile(`\\u([0-9A-Fa-f]{4})`).ReplaceAllStringFunc(s, func(match string) string {
 		code, _ := strconv.ParseInt(match[2:], 16, 32)
 		return string(rune(code))
 	})
+
+	// Then handle 8-digit escapes (\UXXXXXXXX)
+	s = regexp.MustCompile(`\\U([0-9A-Fa-f]{8})`).ReplaceAllStringFunc(s, func(match string) string {
+		code, _ := strconv.ParseInt(match[2:], 16, 32)
+		return string(rune(code))
+	})
+
+	return s
 }

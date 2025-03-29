@@ -5,6 +5,7 @@
   "description": "A Go library to read, modify, and manage package.json file.",
   "license": "MIT",
   "scripts": {
+    "task1": "echo 'Task 1 🌈' && echo 'Task 1 completed successfully!'",
     "test": "go test __tests__/*.go -v",
     "release": "release-it"
   },
