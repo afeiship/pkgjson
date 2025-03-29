@@ -1,8 +1,11 @@
 {
   "name": "pkgjson",
-  "version": "1.0.0",
   "private": true,
+  "version": "1.0.0",
   "description": "A Go library to read, modify, and manage package.json file.",
-  "author": "afeiship",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "go test __tests__/*.go -v",
+    "release": "release-it"
+  }
 }

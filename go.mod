@@ -1,4 +1,4 @@
-module github.com/afeiship/pkgjson
+module github.com/afeiship/pkgname
 
 go 1.21.0
 
